@@ -4,9 +4,34 @@ var express     = require("express"),
     request     = require("request"),
     mongoose    = require("mongoose");
 
+mongoose.connect("mongodb://localhost/yelp_camp");
+
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 app.set("view engine", "ejs");
+
+//SCHEMA SETUP
+var campgroundSchema = new mongoose.Schema({
+    name: String,
+    image: String
+});
+
+var Campground = mongoose.model("Campground", campgroundSchema);
+
+Campground.create(
+    {
+       name: "Salmon Creek",
+       image: "http://camprrm.com/wp-content/uploads/2012/02/widewaters-campground-1-540x250.jpg"
+       
+    }, function(err, campgroound){
+        if(err){
+            console.log("SOMETHING WENT WRONG");
+            console.log(err);
+        }else{
+            console.log("CAMPGROUND CREATED!!!");
+            console.log(campgroound);
+        }
+});
 
 var campgrounds = [
         {name: "Salmon Creek", image: "http://camprrm.com/wp-content/uploads/2012/02/widewaters-campground-1-540x250.jpg"}, 
