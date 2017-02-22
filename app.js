@@ -130,3 +130,11 @@ app.listen(process.env.PORT, process.env.IP, function(){
     console.log("The server has started. Yay!!! Time to celebrate : )");
 });
 
+//RESTFUL ROUTES
+
+//name          url          verb          descrption
+// ================================================================
+// INDEX        /dogs         GET       Displays a list of all dogs
+// NEW          /dogs/new     GET       Displays a form to make a new dog
+// CREATE       /dogs         POST      Adds a new dog to DB
+// SHOW         /dogs/:id     GET       Shows info about one dog
