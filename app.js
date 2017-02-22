@@ -7,14 +7,14 @@ var express     = require("express"),
 mongoose.connect("mongodb://localhost/yelp_camp");
 
 app.use(bodyParser.urlencoded({extended: true}));
-//app.use(express.static("public"));
+app.use(express.static("public"));
 app.set("view engine", "ejs");
 
 //SCHEMA SETUP
 var campgroundSchema = new mongoose.Schema({
     name: String,
     image: String,
-    description: String,
+    description: String
 });
 
 var Campground = mongoose.model("Campground", campgroundSchema);
@@ -62,7 +62,7 @@ app.get("/campgrounds", function(req, res){
             console.log("THERE WAS A PROBLEM - CAMPGROUNDS");
             console.log(err);
         }else{
-            res.render("index", {campgrounds: allCampgrounds});
+            res.render("index", {campgrounds: allCampgrounds}); 
         }
     });
 });
@@ -76,7 +76,8 @@ app.post("/campgrounds", function(req, res){ //this is the REST convention - sho
     //get form data
     var name = req.body.name;
     var image = req.body.image;
-    var newCampground = {name: name, image: image};
+    var description = req.body.description;
+    var newCampground = {name: name, image: image, description: description};
    //create a new campgroun and save to DB
     Campground.create(newCampground, function(err, newlyCreated){
         if(err){
@@ -97,16 +98,28 @@ app.get("/campgrounds/new", function(req, res){
 //SHOW - shows more info about one campgroud
 app.get("/campgrounds/:id", function(req, res){
     //find the campground with provided ID
-    Campground.findById(req.params.id, function(err, foundCampground){
+    Campground.findById(req.params._id, function(err, foundCampground){
         if(err){
             console.log("THERE WAS AN ERROR - CAMPGROUNDS/:ID");
             console.log(err);
-        }else{
-            //render show template with this campground
-            console.log("RES.RENDER CALLED");
-            res.render("show", {campground: foundCampground});   
+        }else {
+            console.log(foundCampground);
+            res.render("show", {campground: foundCampground} );
         }
     });
+    
+   // res.render("show");
+    //find the campground with provided ID
+    // Campground.findById(req.params.id, function(err, foundCampground){
+    //     if(err){
+    //         console.log("THERE WAS AN ERROR - CAMPGROUNDS/:ID");
+    //         console.log(err);
+    //     }else{
+    //         //render show template with this campground
+    //         console.log("RES.RENDER CALLED");
+    //         res.render("show", {campground: foundCampground});   
+    //     }
+    // });
 });
 
 app.get("*", function(req, res){
