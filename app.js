@@ -51,6 +51,8 @@ app.get("/", function(req, res){
     res.render("landing");
 });
 
+
+//INDEX - show all campgrounds
 app.get("/campgrounds", function(req, res){
     //get all campgrounds from db
     Campground.find({}, function(err, allCampgrounds){
@@ -67,6 +69,7 @@ app.get("/search", function(req, res){
     res.render("search");
 });
 
+//CREATE - add new campground to DB
 app.post("/campgrounds", function(req, res){ //this is the REST convention - should be the same url
     //get form data
     var name = req.body.name;
@@ -83,6 +86,7 @@ app.post("/campgrounds", function(req, res){ //this is the REST convention - sho
     });
 });
 
+//NEW - show form to create new campground
 app.get("/campgrounds/new", function(req, res){
     res.render("new.ejs");
 });
