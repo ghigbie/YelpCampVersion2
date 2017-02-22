@@ -13,25 +13,27 @@ app.set("view engine", "ejs");
 //SCHEMA SETUP
 var campgroundSchema = new mongoose.Schema({
     name: String,
-    image: String
+    image: String,
+    description: String,
 });
 
 var Campground = mongoose.model("Campground", campgroundSchema);
 
-// Campground.create(
-//     {
-//       name: "Granite Hill",
-//       image: "http://rvdreams.smugmug.com/Howard-Lindas-Full-Timing-RV/Places-We-Have-Visited-2013/Helena-Montana-Area/i-8PWrr8S/0/S/DSC_0613-S.jpg"
+Campground.create(
+    {
+      name: "Granite Hill",
+      image: "http://rvdreams.smugmug.com/Howard-Lindas-Full-Timing-RV/Places-We-Have-Visited-2013/Helena-Montana-Area/i-8PWrr8S/0/S/DSC_0613-S.jpg",
+      description: "This is a huge granite hill, no bathrooms, no water, beautiful granite"
        
-//     }, function(err, campgroound){
-//         if(err){
-//             console.log("SOMETHING WENT WRONG");
-//             console.log(err);
-//         }else{
-//             console.log("CAMPGROUND CREATED!!!");
-//             console.log(campgroound);
-//         }
-// });
+    }, function(err, campgroound){
+        if(err){
+            console.log("SOMETHING WENT WRONG");
+            console.log(err);
+        }else{
+            console.log("CAMPGROUND CREATED!!!");
+            console.log(campgroound);
+        }
+});
 
 // var campgrounds = [
 //         {name: "Salmon Creek", image: "http://camprrm.com/wp-content/uploads/2012/02/widewaters-campground-1-540x250.jpg"}, 
@@ -91,7 +93,11 @@ app.get("/campgrounds/new", function(req, res){
     res.render("new.ejs");
 });
 
+//this needs to be positioned AFTER "/campgrounds/new"
 app.get("/campgrounds/:id", function(req, res){
+    //find the campground with provided ID
+    //render show template with this campground
+    
    res.send("<h1>THIS WILL BE THE SHOW PAGE ONE DAY</h1>"); 
 });
 
