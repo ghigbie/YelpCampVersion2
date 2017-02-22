@@ -25,13 +25,13 @@ var Campground = mongoose.model("Campground", campgroundSchema);
 //       image: "http://rvdreams.smugmug.com/Howard-Lindas-Full-Timing-RV/Places-We-Have-Visited-2013/Helena-Montana-Area/i-8PWrr8S/0/S/DSC_0613-S.jpg",
 //       description: "This is a huge granite hill, no bathrooms, no water, beautiful granite"
        
-//     }, function(err, campgroound){
+//     }, function(err, campground){
 //         if(err){
 //             console.log("SOMETHING WENT WRONG");
 //             console.log(err);
 //         }else{
 //             console.log("CAMPGROUND CREATED!!!");
-//             console.log(campgroound);
+//             console.log(campground);
 //         }
 // });
 
@@ -106,7 +106,6 @@ app.get("/campgrounds/:id", function(req, res){
             res.render("show", {campground: foundCampground});   
         }
     });
-    req.params.id
 });
 
 app.get("*", function(req, res){
