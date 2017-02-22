@@ -72,9 +72,15 @@ app.post("/campgrounds", function(req, res){ //this is the REST convention - sho
     var name = req.body.name;
     var image = req.body.image;
     var newCampground = {name: name, image: image};
-    campgrounds.push(newCampground);//add to campgrounds array
-
-    res.redirect("/campgrounds");
+   //create a new campgroun and save to DB
+    Campground.create(newCampground, function(err, newlyCreated){
+        if(err){
+            console.log("THERE WAS AN ERROR");
+            console.log(err);
+        }else{
+            res.redirect("/campgrounds");
+        }
+    });
 });
 
 app.get("/campgrounds/new", function(req, res){
