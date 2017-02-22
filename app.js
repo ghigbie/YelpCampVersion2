@@ -62,7 +62,7 @@ app.get("/campgrounds", function(req, res){
             console.log("THERE WAS A PROBLEM");
             console.log(err);
         }else{
-            res.render("campgrounds", {campgrounds: allCampgrounds});
+            res.render("index", {campgrounds: allCampgrounds});
         }
     });
 });
@@ -90,15 +90,15 @@ app.post("/campgrounds", function(req, res){ //this is the REST convention - sho
 
 //NEW - show form to create new campground
 app.get("/campgrounds/new", function(req, res){
-    res.render("new.ejs");
+    res.render("new");
 });
 
 //this needs to be positioned AFTER "/campgrounds/new"
+//SHOW - shows more info about one campgroud
 app.get("/campgrounds/:id", function(req, res){
     //find the campground with provided ID
     //render show template with this campground
-    
-   res.send("<h1>THIS WILL BE THE SHOW PAGE ONE DAY</h1>"); 
+    res.render("show");    
 });
 
 app.get("*", function(req, res){
