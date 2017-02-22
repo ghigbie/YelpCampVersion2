@@ -7,7 +7,6 @@ var express     = require("express"),
 mongoose.connect("mongodb://localhost/yelp_camp");
 
 app.use(bodyParser.urlencoded({extended: true}));
-app.use(express.static("public"));
 app.set("view engine", "ejs");
 
 //SCHEMA SETUP
@@ -98,7 +97,7 @@ app.get("/campgrounds/new", function(req, res){
 //SHOW - shows more info about one campgroud
 app.get("/campgrounds/:id", function(req, res){
     //find the campground with provided ID
-    Campground.findById(req.params._id, function(err, foundCampground){
+    Campground.findById(req.params.id, function(err, foundCampground){
         if(err){
             console.log("THERE WAS AN ERROR - CAMPGROUNDS/:ID");
             console.log(err);
@@ -107,6 +106,14 @@ app.get("/campgrounds/:id", function(req, res){
             res.render("show", {campground: foundCampground} );
         }
     });
+});
+
+app.get("/campgrounds/:id", function(req, res){
+    //find the campground with provided ID
+    //render the show template with that campground
+    
+    res.send("THIS WILL BE A SHOW PAGE");
+});
     
    // res.render("show");
     //find the campground with provided ID
@@ -120,11 +127,12 @@ app.get("/campgrounds/:id", function(req, res){
     //         res.render("show", {campground: foundCampground});   
     //     }
     // });
-});
+// 
 
 app.get("*", function(req, res){
    res.render("notFound"); 
 });
+
 
 app.listen(process.env.PORT, process.env.IP, function(){
     console.log("The server has started. Yay!!! Time to celebrate : )");
