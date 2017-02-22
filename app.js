@@ -91,6 +91,10 @@ app.get("/campgrounds/new", function(req, res){
     res.render("new.ejs");
 });
 
+app.get("campgrounds/:id", function(req, res){
+   res.send("THIS WILL BE THE SHOW PAGE ONE DAY"); 
+});
+
 app.get("*", function(req, res){
    res.render("notFound"); 
 });
