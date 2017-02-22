@@ -91,8 +91,8 @@ app.get("/campgrounds/new", function(req, res){
     res.render("new.ejs");
 });
 
-app.get("campgrounds/:id", function(req, res){
-   res.send("THIS WILL BE THE SHOW PAGE ONE DAY"); 
+app.get("/campgrounds/:id", function(req, res){
+   res.send("<h1>THIS WILL BE THE SHOW PAGE ONE DAY</h1>"); 
 });
 
 app.get("*", function(req, res){
