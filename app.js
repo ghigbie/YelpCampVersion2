@@ -97,8 +97,16 @@ app.get("/campgrounds/new", function(req, res){
 //SHOW - shows more info about one campgroud
 app.get("/campgrounds/:id", function(req, res){
     //find the campground with provided ID
-    //render show template with this campground
-    res.render("show");    
+    Campground.FindByID(req.params.id, function(err, foundCampground){
+        if(err){
+            console.log("THERE WAS AN ERROR");
+            console.log(err);
+        }else{
+            //render show template with this campground
+            res.render("show", {campground: foundCampground});   
+        }
+    });
+    req.params.id
 });
 
 app.get("*", function(req, res){
