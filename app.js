@@ -7,7 +7,7 @@ var express     = require("express"),
 mongoose.connect("mongodb://localhost/yelp_camp");
 
 app.use(bodyParser.urlencoded({extended: true}));
-app.use(express.static("public"));
+//app.use(express.static("public"));
 app.set("view engine", "ejs");
 
 //SCHEMA SETUP
@@ -59,7 +59,7 @@ app.get("/campgrounds", function(req, res){
     //get all campgrounds from db
     Campground.find({}, function(err, allCampgrounds){
         if(err){
-            console.log("THERE WAS A PROBLEM");
+            console.log("THERE WAS A PROBLEM - CAMPGROUNDS");
             console.log(err);
         }else{
             res.render("index", {campgrounds: allCampgrounds});
@@ -80,7 +80,7 @@ app.post("/campgrounds", function(req, res){ //this is the REST convention - sho
    //create a new campgroun and save to DB
     Campground.create(newCampground, function(err, newlyCreated){
         if(err){
-            console.log("THERE WAS AN ERROR");
+            console.log("THERE WAS AN ERROR = POST CAMPGROUNDS");
             console.log(err);
         }else{
             res.redirect("/campgrounds");
@@ -97,12 +97,13 @@ app.get("/campgrounds/new", function(req, res){
 //SHOW - shows more info about one campgroud
 app.get("/campgrounds/:id", function(req, res){
     //find the campground with provided ID
-    Campground.FindByID(req.params.id, function(err, foundCampground){
+    Campground.findById(req.params.id, function(err, foundCampground){
         if(err){
-            console.log("THERE WAS AN ERROR");
+            console.log("THERE WAS AN ERROR - CAMPGROUNDS/:ID");
             console.log(err);
         }else{
             //render show template with this campground
+            console.log("RES.RENDER CALLED");
             res.render("show", {campground: foundCampground});   
         }
     });
