@@ -18,6 +18,7 @@ var campgroundSchema = new mongoose.Schema({
 
 var Campground = mongoose.model("Campground", campgroundSchema);
 
+
 // Campground.create(
 //     {
 //       name: "Granite Hill",
@@ -33,6 +34,7 @@ var Campground = mongoose.model("Campground", campgroundSchema);
 //             console.log(campground);
 //         }
 // });
+
 
 // var campgrounds = [
 //         {name: "Salmon Creek", image: "http://camprrm.com/wp-content/uploads/2012/02/widewaters-campground-1-540x250.jpg"}, 
@@ -80,13 +82,14 @@ app.post("/campgrounds", function(req, res){ //this is the REST convention - sho
    //create a new campgroun and save to DB
     Campground.create(newCampground, function(err, newlyCreated){
         if(err){
-            console.log("THERE WAS AN ERROR = POST CAMPGROUNDS");
+            console.log("THERE WAS AN ERROR - POST CAMPGROUNDS");
             console.log(err);
         }else{
             res.redirect("/campgrounds");
         }
     });
 });
+
 
 //NEW - show form to create new campground
 app.get("/campgrounds/new", function(req, res){
@@ -97,7 +100,7 @@ app.get("/campgrounds/new", function(req, res){
 //SHOW - shows more info about one campgroud
 app.get("/campgrounds/:id", function(req, res){
     //find the campground with provided ID
-    Campground.findById(req.params.id, function(err, foundCampground){
+    Campground.findById(req.params._id, function(err, foundCampground){
         if(err){
             console.log("THERE WAS AN ERROR - CAMPGROUNDS/:ID");
             console.log(err);
@@ -108,12 +111,6 @@ app.get("/campgrounds/:id", function(req, res){
     });
 });
 
-app.get("/campgrounds/:id", function(req, res){
-    //find the campground with provided ID
-    //render the show template with that campground
-    
-    res.send("THIS WILL BE A SHOW PAGE");
-});
     
    // res.render("show");
     //find the campground with provided ID
@@ -140,9 +137,20 @@ app.listen(process.env.PORT, process.env.IP, function(){
 
 //RESTFUL ROUTES
 
-//name          url          verb          descrption
+//name          url           verb          descrption
 // ================================================================
-// INDEX        /dogs         GET       Displays a list of all dogs
-// NEW          /dogs/new     GET       Displays a form to make a new dog
-// CREATE       /dogs         POST      Adds a new dog to DB
-// SHOW         /dogs/:id     GET       Shows info about one dog
+// INDEX        /dogs          GET       Displays a list of all dogs
+// NEW          /dogs/new      GET       Displays a form to make a new dog
+// CREATE       /dogs          POST      Adds a new dog to DB
+// SHOW         /dogs/:id      GET       Shows info about one dog
+// EDIT         /dogs/:id/edit GET       Show edit form for one dog
+// UPDATE       /dogs/:id      PUT       Update a particular dog, then redirects somewhere
+// DESTROY      /dogs/:id      DELETE    Deletes a particular dog, then redirects somewhere
+
+//REST - stands for representational state transfer
+
+//CRUD
+//CREATE
+//READ
+//UPDATE
+//DESTROY
