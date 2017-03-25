@@ -17,38 +17,6 @@ var campgroundSchema = new mongoose.Schema({
 });
 
 var Campground = mongoose.model("Campground", campgroundSchema);
-
-
-// Campground.create(
-//     {
-//       name: "Granite Hill",
-//       image: "http://rvdreams.smugmug.com/Howard-Lindas-Full-Timing-RV/Places-We-Have-Visited-2013/Helena-Montana-Area/i-8PWrr8S/0/S/DSC_0613-S.jpg",
-//       description: "This is a huge granite hill, no bathrooms, no water, beautiful granite"
-       
-//     }, function(err, campground){
-//         if(err){
-//             console.log("SOMETHING WENT WRONG");
-//             console.log(err);
-//         }else{
-//             console.log("CAMPGROUND CREATED!!!");
-//             console.log(campground);
-//         }
-// });
-
-
-// var campgrounds = [
-//         {name: "Salmon Creek", image: "http://camprrm.com/wp-content/uploads/2012/02/widewaters-campground-1-540x250.jpg"}, 
-//         {name: "Granite Hill", image: "http://rvdreams.smugmug.com/Howard-Lindas-Full-Timing-RV/Places-We-Have-Visited-2013/Helena-Montana-Area/i-8PWrr8S/0/S/DSC_0613-S.jpg"},    
-//         {name: "Mountain Goat's Rest", image: "http://rvdreams.smugmug.com/Howard-Lindas-Full-Timing-RV/Places-We-Have-Visited-2013/Helena-Montana-Area/i-k3gqnJ6/0/S/DSC_0612-S.jpg"},
-//         {name: "Salmon Creek", image: "http://camprrm.com/wp-content/uploads/2012/02/widewaters-campground-1-540x250.jpg"}, 
-//         {name: "Granite Hill", image: "http://rvdreams.smugmug.com/Howard-Lindas-Full-Timing-RV/Places-We-Have-Visited-2013/Helena-Montana-Area/i-8PWrr8S/0/S/DSC_0613-S.jpg"},    
-//         {name: "Mountain Goat's Rest", image: "http://rvdreams.smugmug.com/Howard-Lindas-Full-Timing-RV/Places-We-Have-Visited-2013/Helena-Montana-Area/i-k3gqnJ6/0/S/DSC_0612-S.jpg"},
-//         {name: "Salmon Creek", image: "http://camprrm.com/wp-content/uploads/2012/02/widewaters-campground-1-540x250.jpg"}, 
-//         {name: "Granite Hill", image: "http://rvdreams.smugmug.com/Howard-Lindas-Full-Timing-RV/Places-We-Have-Visited-2013/Helena-Montana-Area/i-8PWrr8S/0/S/DSC_0613-S.jpg"},    
-//         {name: "Mountain Goat's Rest", image: "http://rvdreams.smugmug.com/Howard-Lindas-Full-Timing-RV/Places-We-Have-Visited-2013/Helena-Montana-Area/i-k3gqnJ6/0/S/DSC_0612-S.jpg"}    
-// ];       
-
-
     
 app.get("/", function(req, res){
     res.render("landing");
@@ -100,7 +68,7 @@ app.get("/campgrounds/new", function(req, res){
 //SHOW - shows more info about one campgroud
 app.get("/campgrounds/:id", function(req, res){
     //find the campground with provided ID
-    Campground.findById(req.params._id, function(err, foundCampground){
+    Campground.findById(req.params.id, function(err, foundCampground){
         if(err){
             console.log("THERE WAS AN ERROR - CAMPGROUNDS/:ID");
             console.log(err);
@@ -146,6 +114,8 @@ app.listen(process.env.PORT, process.env.IP, function(){
 // EDIT         /dogs/:id/edit GET       Show edit form for one dog
 // UPDATE       /dogs/:id      PUT       Update a particular dog, then redirects somewhere
 // DESTROY      /dogs/:id      DELETE    Deletes a particular dog, then redirects somewhere
+
+// There are 3 routes that redirect: CREATE, UPDATE, DESTROY - these take something new and send you
 
 //REST - stands for representational state transfer
 
